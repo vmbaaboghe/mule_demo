@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="CE-3.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd 
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd ">
+    <flow name="Spell_CheckerFlow1" doc:name="Spell_CheckerFlow1">
+        <file:inbound-endpoint path="D:\tools\Mulestudio\MuleStudio\examples\SpellChecker\InXML" responseTimeout="10000" doc:name="Incoming Data File"/>
+        <echo-component doc:name="Log Info"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="www.google.com/tbproxy/spell?lang=en" port="80" doc:name="GOOGLE - SPELL CHECK SERVICE" doc:description="GOOGLE - SPELL CHECK SERVICE"/>
+        <file:outbound-endpoint path="D:\tools\Mulestudio\MuleStudio\examples\SpellChecker\OutXML" outputPattern="#[function:datestamp:dd-MM-yy]_#[function:systime].xml" responseTimeout="10000" doc:name="File out" doc:description="File out"/>
+    </flow>
+</mule>
